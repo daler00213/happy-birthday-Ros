@@ -247,16 +247,16 @@
         <h1>Surprise! 🎉</h1>
         <p>Here is a little video message from me to you:</p>
         <video id="secret-video" controls>
-            <source src="assets/secret_video.mp4" type="video/mp4">
+            <source src="secret_video.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
     </div>
 
     <script>
         // Audio files must be placed inside an 'assets' folder next to this file
-        const voiceOpen = new Audio('assets/voice_open.mp3');
-        const voiceQuiz = new Audio('assets/voice_quiz.mp3');
-        const voiceHB = new Audio('assets/voice_hb.mp3');
+        const voiceOpen = new Audio('voice_open.mp3');
+        const voiceQuiz = new Audio('voice_quiz.mp3');
+        const voiceHB = new Audio('voice_hb.mp3');
 
         function showPage(pageId) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
