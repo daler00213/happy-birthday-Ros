@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Special Birthday Surprise ✨</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Beautiful Pink/Red Gradient Background */
+        body {
+            background: linear-gradient(135deg, #ffe5ec 0%, #ffc2d1 50%, #ffb3c6 100%);
+            color: #4a1525;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .page {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            width: 90%;
+            max-width: 500px;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.55);
+            border-radius: 24px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(255, 143, 171, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        .active { display: flex; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Buttons styling */
+        button {
+            background: linear-gradient(135deg, #ff4d6d 0%, #ff758c 100%);
+            border: none;
+            color: white;
+            padding: 16px 36px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4);
+            transition: all 0.2s ease;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 77, 109, 0.6);
+        }
+
+        .quiz-btn-container {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            width: 100%;
+        }
+
+        .quiz-btn {
+            flex: 1;
+            background: #fff0f3;
+            border: 2px solid #ffb3c6;
+            color: #c9184a;
+            box-shadow: none;
+            border-radius: 15px;
+        }
+
+        .quiz-btn:hover {
+            background: #ffccd5;
+            box-shadow: none;
+            color: #800f2f;
+        }
+
+        /* Cute Red/Pink Envelope */
+        .envelope-wrapper {
+            position: relative;
+            background-color: #ff4d6d;
+            width: 280px;
+            height: 180px;
+            margin-top: 40px;
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0 12px 25px rgba(128, 15, 47, 0.3);
+        }
+
+        .envelope-flap {
+            position: absolute;
+            top: 0;
+            width: 0;
+            height: 0;
+            border-left: 140px solid transparent;
+            border-right: 140px solid transparent;
+            border-top: 100px solid #ff758c;
+            transform-origin: top;
+            transition: transform 0.5s ease;
+            z-index: 3;
+        }
+
+        .envelope-wrapper.open .envelope-flap {
+            transform: rotateX(180deg);
+            z-index: 1;
+        }
+
+        /* Letter Styling with "Ramka" (Decorative Border) */
+        .letter {
+            position: absolute;
+            bottom: 0;
+            left: 10px;
+            width: 260px;
+            height: 160px;
+            background: #fff;
+            color: #222;
+            padding: 15px;
+            border-radius: 5px;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 2;
+            overflow: hidden;
+            font-size: 0.9rem;
+            text-align: left;
+            /* Small ramka for preview mode */
+            border: 3px double #ff758c;
+        }
+
+        /* Open/Full Screen Ramka Layout */
+        .envelope-wrapper.open .letter {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 450px;
+            height: 75vh;
+            z-index: 10;
+            overflow-y: auto;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            padding: 35px;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            background: #ffffff;
+            
+            /* BEAUTIFUL BIRTHDAY RAMKA (BORDER) */
+            border: 10px solid #ffccd5;
+            outline: 3px dashed #ff4d6d;
+            outline-offset: -7px;
+            border-radius: 16px;
+        }
+
+        video {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            margin-top: 20px;
+            border: 4px solid white;
+        }
+
+        h1 { font-size: 1.8rem; margin-bottom: 10px; color: #590d22; }
+        p { color: #800f2f; font-size: 1.05rem; font-weight: 500; }
+  /* Floating Emoji Animation */
+  .floating-emoji {
+    position: fixed;
+    top: -50px;
+    z-index: 9999;
+    font-size: 2rem;
+    pointer-events: none;
+    animation: fall linear forwards;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(105vh) rotate(360deg);
+    }
+}
+    </style>
+</head>
+<body>
+
+    <!-- PAGE 1: LOCK SCREEN -->
+    <div id="page1" class="page active">
+        <h1>Hey! You have a special message. 💕</h1>
+        <p>Turn your sound up before opening! 🔊</p>
+        <button id="btn-open">Open Envelope ✉️</button>
+    </div>
+
+    <!-- PAGE 2: THE QUIZ -->
+    <div id="page2" class="page">
+        <h1>Quick Question... 🤔</h1>
+        <p>Whose birthday is it today?</p>
+        <div class="quiz-btn-container">
+            <!-- You can change "Rose" to a funny joke answer -->
+            <button class="quiz-btn" onclick="wrongAnswer(this)">Dollar</button>
+            <!-- CHANGE 'Her Name' to her actual name below -->
+            <button class="quiz-btn" id="correct-btn">Ros</button>
+        </div>
+    </div>
+
+    <!-- PAGE 3: THE ENVELOPE & LETTER -->
+    <div id="page3" class="page">
+        <h1>For You. 🌸</h1>
+        <p>Click the letter envelope to open and read it.</p>
+        
+        <div class="envelope-wrapper" id="envelope">
+            <div class="envelope-flap"></div>
+            <div class="letter">
+                <p style="color:#ff4d6d; font-weight:bold; font-size: 1.3rem; margin-bottom:15px; text-align: center;">🎉 Happy Birthday! 🎉</p>
+                
+                <!-- EDIT YOUR 200-300 WORD LETTER BELOW -->
+                <p style="color:#333; margin-bottom:15px;">
+                    Special for Ros,
+                </p>
+                <p style="color:#333; margin-bottom:15px;">
+                    Happy Birthday! I really wanted to do something special for you, but because of the distance and because i don't have money🥲 i decided to use my website skill. WE ALMOST 3 MONTHS TOGETHER, but i feel like i know you my whole life. You are such a good person, i like your personality, your smile, your laugh, your voice, your appereance and you are as important for me as my family🫂 OMG you're 24 already
+                </p>
+                <p style="color:#333; margin-bottom:15px;">
+                    I really love how we are talking and spending time together, you know i've never have these feelings before and i'm really happy that i'm experiencing it with you. I love you and cannot explain it with words❤️ I wish your life will become better, you will find the best husband(i will kill him if he is not) You will be so rich and buy me car(heheh joking) or that robots that you wanna to. Always be healthy, be always pretty(i know you are the most)💅 and always afford everything you want. You deserve all the best because you are the best
+                </p>
+                <p style="color:#333; margin-bottom:15px;">
+                    I'm so happy and gratefull for you and we have to meet each other in real life in the future!!!!!!!! And hope we will continue talking like always do. I hope this day will be the best for you🎂💝
+                </p>
+
+                <!-- Surprise trigger inside the letter -->
+                <center><button id="btn-surprise" style="display:none; margin-top:30px;">One More Surprise... 🎁 Open after reading!!</button></center>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE 4: SECRET VIDEO REVEAL -->
+    <div id="page4" class="page">
+        <h1>Surprise! 🎉</h1>
+        <p>Here is a little video message from me to you:</p>
+        <video id="secret-video" controls>
+            <source src="assets/secret_video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <script>
+        // Audio files must be placed inside an 'assets' folder next to this file
+        const voiceOpen = new Audio('assets/voice_open.mp3');
+        const voiceQuiz = new Audio('assets/voice_quiz.mp3');
+        const voiceHB = new Audio('assets/voice_hb.mp3');
+
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+        }
+
+        // Page 1 Logic
+        document.getElementById('btn-open').addEventListener('click', () => {
+            voiceOpen.play().catch(e => console.log("Audio play delayed"));
+            setTimeout(() => {
+                showPage('page2');
+                voiceQuiz.play().catch(e => console.log("Audio play delayed"));
+            }, 1000);
+        });
+
+        // Quiz Logic for Wrong Answer
+        function wrongAnswer(button) {
+            button.style.transform = 'translateX(-10px)';
+            setTimeout(() => button.style.transform = 'translateX(10px)', 100);
+            setTimeout(() => button.style.transform = 'translateX(0)', 200);
+            alert("Haha, wrong answer! Try again! 😜");
+        }
+
+       // Quiz Logic for Correct Answer
+document.getElementById('correct-btn').addEventListener('click', () => {
+    // 1. Start the falling cakes immediately
+    triggerBirthdayConfetti(); 
+
+    // 3. Wait 1.5 seconds so she sees the effects, then switch pages
+    setTimeout(() => {
+        showPage('page3');
+    }, 1500);
+});
+
+// Envelope Opening Interaction
+const envelope = document.getElementById('envelope');
+envelope.addEventListener('click', function() {
+    if (!this.classList.contains('open')) {
+        this.classList.add('open');
+        
+        // PASTE IT HERE 🎉
+        voiceHB.play().catch(e => console.log("Audio play delayed"));
+        
+        // The "One More Surprise" button appears inside the letter after 4 seconds
+        setTimeout(() => {
+            document.getElementById('btn-surprise').style.display = 'block';
+        }, 4000);
+    }
+});
+
+        // Final Video Surprise Navigation
+        document.getElementById('btn-surprise').addEventListener('click', (e) => {
+            e.stopPropagation(); 
+            showPage('page4');
+            document.getElementById('secret-video').play().catch(e => console.log("Video autoplay blocked"));
+        });
+// Function to create falling birthday stickers/emojis
+function triggerBirthdayConfetti() {
+    const emojis = ['🎂', '🎉', '💖', '✨', '🎈', '💝'];
+    
+    // This loop will run every 300 milliseconds (3 times a second) to keep them falling constantly
+    const rainInterval = setInterval(() => {
+        const emojiElement = document.createElement('div');
+        emojiElement.classList.add('floating-emoji');
+        
+        emojiElement.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+        emojiElement.style.left = Math.random() * 100 + 'vw';
+        emojiElement.style.fontSize = Math.random() * (3 - 1.5) + 1.5 + 'rem';
+        emojiElement.style.animationDuration = Math.random() * (6 - 4) + 4 + 's'; // Slightly slower, more elegant fall
+
+        document.body.appendChild(emojiElement);
+
+        // Cleans up the emojis after they hit the bottom
+        setTimeout(() => {
+            emojiElement.remove();
+        }, 7000);
+    }, 300); // Spawns a new emoji every 300ms
+
+    // STOP spawning new emojis after 15 seconds (Change 15000 to 20000 if you want 20 seconds!)
+    setTimeout(() => {
+        clearInterval(rainInterval);
+    }, 10000);
+}
+    </script>
+</body>
+</html>
